@@ -30,6 +30,7 @@ services:
             #ODOO_MINOR: druidoo
             #SERVER_WIDE_MODULES: base,web,server_mode,saas_client
             #SERVER_MODE: 'false'
+            LIST_DB: 'true'
             FIXDBS: 'true'
             #REDIS_HOST: redis
             #ENABLE_REDIS: 'True'
