@@ -25,9 +25,7 @@ services:
                 ODOO_MINOR: druidoo-e
 
         environment:
-            #ODOO_IMAGE: druidoo/odoo-druidoo
-            #ODOO_MAJOR: 12.0
-            #ODOO_MINOR: druidoo
+            #DATABASE: dbname
             #SERVER_WIDE_MODULES: base,web,server_mode,saas_client
             #SERVER_MODE: 'false'
             LIST_DB: 'true'
