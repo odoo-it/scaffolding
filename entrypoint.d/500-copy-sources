@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Copying sources from $EXTRA_ADDONS to $CUSTOM_ADDONS"
+cp -r $EXTRA_ADDONS/* $CUSTOM_ADDONS

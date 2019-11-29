@@ -1,0 +1,48 @@
+version: '2.4'
+services:
+
+    db:
+        extends:
+            file: common.yml
+            service: db
+
+    redis:
+        extends:
+            file: common.yml
+            service: redis
+        
+    odoo:
+        extends:
+            file: common.yml
+            service: odoo
+
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+            args:
+                ODOO_IMAGE: druidoo/odoo-druidoo
+                ODOO_MAJOR: 12.0
+                ODOO_MINOR: druidoo-e
+
+        environment:
+            #ODOO_IMAGE: druidoo/odoo-druidoo
+            #ODOO_MAJOR: 12.0
+            #ODOO_MINOR: druidoo
+            #SERVER_WIDE_MODULES: base,web,server_mode,saas_client
+            #SERVER_MODE: 'false'
+            FIXDBS: 'true'
+            #REDIS_HOST: redis
+            #ENABLE_REDIS: 'True'
+
+        volumes:
+            - ./custom/repositories:/opt/odoo/custom/repositories:rw,z
+            - filestore:/opt/odoo/odoo_data
+
+        depends_on:
+            - db
+            - redis
+
+volumes:
+    db:
+    filestore:
+    redis:

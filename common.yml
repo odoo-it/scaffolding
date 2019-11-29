@@ -1,0 +1,36 @@
+version: '2.4'
+services:
+
+    db:
+        image: postgres:9.6
+        environment:
+            POSTGRES_USER: odoo
+            POSTGRES_PASSWORD: odoo
+            POSTGRES_DB: postgres
+            PGDATA: /var/lib/postgresql/data/pgdata
+        volumes:
+            - db:/var/lib/postgresql/data/pgdata
+
+    redis:
+        image: redis:4-alpine
+        volumes:
+            - redis:/data
+        command:
+            - redis-server
+            - --appendonly
+            - 'yes'
+            #- --requirepass
+            #- redispass
+        
+    odoo:
+
+        ports:
+            - "8069:8069"
+        tty: true
+        environment:
+            SERVER_WIDE_MODULES: base,web
+            #SERVER_MODE: 'false'
+            #FIXDBS: 'true'
+            #REDIS_HOST: redis
+            #ENABLE_REDIS: 'True'
+        stdin_open: true
