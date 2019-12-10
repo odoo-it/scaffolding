@@ -2,40 +2,57 @@ version: '2.4'
 services:
 
     db:
-        extends:
-            file: common.yml
-            service: db
+        image: postgres:10.6
+        environment:
+            POSTGRES_USER: odoo
+            POSTGRES_PASSWORD: odoo
+            POSTGRES_DB: postgres
+            PGDATA: /var/lib/postgresql/data/pgdata
+        volumes:
+            - db:/var/lib/postgresql/data/pgdata
 
     redis:
-        extends:
-            file: common.yml
-            service: redis
+        image: redis:4-alpine
+        volumes:
+            - redis:/data
+        command:
+            - redis-server
+            - --appendonly
+            - 'yes'
+            #- --requirepass
+            #- redispass
         
     odoo:
-        extends:
-            file: common.yml
-            service: odoo
-
         build:
             context: .
             dockerfile: ./Dockerfile
             args:
-                ODOO_IMAGE: druidoo/odoo-druidoo
-                ODOO_MAJOR: 12.0
-                ODOO_MINOR: druidoo-e
+                DOCKER_IMAGE: druidoo/odoo
+                DOCKER_TAG: 12.0.druidoo-e
+
+        ports:
+            - "8069:8069"
+        
+        tty: true
+        stdin_open: true
 
         environment:
-            #DATABASE: dbname
-            #SERVER_WIDE_MODULES: base,web,server_mode,saas_client
-            #SERVER_MODE: 'false'
-            LIST_DB: 'true'
+            DATABASE: &dbname test
+            PGDATABASE: *dbname
+            #WAIT_PG: 'true'
+            #LIST_DB: 'true'
+            #UNACCENT: 'true'
+            # Always true?
             FIXDBS: 'true'
-            #REDIS_HOST: redis
-            #ENABLE_REDIS: 'True'
+            # Odoo-saas
+            SERVER_WIDE_MODULES: base,web,server_mode,saas_client
+            # Redis session store (only if odoo-saas)
+            REDIS_HOST: redis
+            ENABLE_REDIS: 'True'
 
         volumes:
-            - ./custom/repositories:/opt/odoo/custom/repositories:rw,z
-            - filestore:/opt/odoo/odoo_data
+            - ./custom/repositories:/home/odoo/custom/repositories:rw,z
+            - filestore:/home/odoo/.local/share/
 
         depends_on:
             - db

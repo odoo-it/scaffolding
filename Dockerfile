@@ -1,8 +1,8 @@
-ARG ODOO_IMAGE=druidoo/odoo-druidoo
-ARG ODOO_MAJOR=12.0
-ARG ODOO_MINOR=druidoo
+ARG DOCKER_IMAGE
+ARG DOCKER_TAG
 
-FROM $ODOO_IMAGE:$ODOO_MAJOR.$ODOO_MINOR
+FROM $DOCKER_IMAGE:$DOCKER_TAG
 
 # Add new entrypoint scripts
-COPY entrypoint.d/* $RESOURCES/entrypoint.d
+COPY conf.d/* $RESOURCES/conf.d/
+COPY entrypoint.d/* $RESOURCES/entrypoint.d/

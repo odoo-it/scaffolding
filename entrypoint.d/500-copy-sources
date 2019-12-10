@@ -1,6 +1,6 @@
 #!/bin/bash
 
 if [ "$COPY_SOURCES" == "true" ]; then
-	echo "Copying sources from $EXTRA_ADDONS to $CUSTOM_ADDONS"
-	cp -r $EXTRA_ADDONS/* $CUSTOM_ADDONS
+	echo "Copying sources from $SOURCES to $CUSTOM"
+	cp -r $SOURCES/repositories/* $CUSTOM/repositories/
 fi
