@@ -19,16 +19,14 @@ services:
             - redis-server
             - --appendonly
             - 'yes'
-            #- --requirepass
-            #- redispass
         
     odoo:
         build:
             context: .
             dockerfile: ./Dockerfile
             args:
-                DOCKER_IMAGE: druidoo/odoo-druidoo
-                DOCKER_TAG: 12.0.druidoo-e
+                DOCKER_IMAGE: druidoo/odoo-saas
+                DOCKER_TAG: 12.0-enterprise
 
         ports:
             - "8069:8069"
@@ -45,7 +43,7 @@ services:
             # Always true?
             FIXDBS: 'true'
             # Odoo-saas
-            #SERVER_WIDE_MODULES: base,web,server_mode,saas_client
+            SERVER_WIDE_MODULES: base,web,server_mode,saas_client
             # Redis session store (only if odoo-saas)
             REDIS_HOST: redis
             ENABLE_REDIS: 'True'
