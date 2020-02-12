@@ -50,7 +50,7 @@ services:
 
         volumes:
             - ./custom/repositories:/home/odoo/custom/repositories:rw,z
-            - filestore:/home/odoo/.local/share/
+            - filestore:/home/odoo/data
 
         depends_on:
             - db
