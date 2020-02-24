@@ -49,7 +49,7 @@ services:
             ENABLE_REDIS: 'True'
 
         volumes:
-            - ./custom/repositories:/home/odoo/custom/repositories:rw,z
+            - ./repositories:/home/odoo/custom/repositories:rw,z
             - filestore:/home/odoo/data
 
         depends_on:
