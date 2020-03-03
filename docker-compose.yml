@@ -21,13 +21,7 @@ services:
             - 'yes'
         
     odoo:
-        build:
-            context: .
-            dockerfile: ./Dockerfile
-            args:
-                DOCKER_IMAGE: druidoo/odoo-saas
-                DOCKER_TAG: 12.0-enterprise
-
+        image: druidoo/odoo-saas:12.0-enterprise
         ports:
             - "8069:8069"
         
