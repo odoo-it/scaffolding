@@ -34,6 +34,7 @@ services:
             WAIT_PG: true
             LIST_DB: true
             UNACCENT: true
+            LOG_LEVEL: debug
             # Always true?
             FIXDBS: true
             # Odoo-saas
