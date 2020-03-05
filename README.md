@@ -7,18 +7,16 @@ Docker-compose scaffolding project, to use with odoo-druidoo images
 git clone git@github.com:druidoo/druidoo-scaffolding.git project && cd project
 ```
 
-2. Edit `docker-compose.yml` to use the proper docker image, odoo major and minor
+2. Edit `docker-compose.yml` to use the proper docker image. You might need to run `docker login` before, to get access to our saas images.
 
-3. If you want, you can copy repositories in the image to the custom/repositories folder. They take priority over the ones on the image.
-
+3. Clone repositories or edit code from your host by working on `repositories`. Repositories there will be loaded with priority over the ones included in the image, allowing you to work locally.
 ```
-docker-compose run --rm -e COPY_SOURCES=true odoo
+cd repositories
+git clone https://github.com/OCA/partner-contact.git
 ```
 
-4. Clone repositories or edit code from your host by working on `custom/repositories`
-
-5. Launch odoo
-
+5. Launch and enter odoo container, and launch odoo
 ```
-docker-compose up
+docker-compose run --rm --service-ports odoo bash
+odoo
 ```
