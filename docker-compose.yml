@@ -35,14 +35,16 @@ services:
             LIST_DB: true
             UNACCENT: true
             LOG_LEVEL: debug
-            # Always true?
-            FIXDBS: true
             # Odoo-saas
+            FIXDBS: true
             SERVER_MODE: Dev
             SERVER_WIDE_MODULES: base,web,server_mode,saas_client
             # Redis session store (only if odoo-saas)
             REDIS_HOST: redis
             ENABLE_REDIS: 'True'
+            # Custom Entrypoints
+            CUSTOM_CONFIG: |-
+                [options]
 
         volumes:
             - ./repositories:/home/odoo/custom/repositories:rw,z
