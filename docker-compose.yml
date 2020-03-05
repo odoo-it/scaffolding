@@ -31,12 +31,12 @@ services:
         environment:
             DATABASE: &dbname test
             PGDATABASE: *dbname
-            WAIT_PG: true
-            LIST_DB: true
-            UNACCENT: true
-            LOG_LEVEL: debug
+            WAIT_PG: 'true'
+            LIST_DB: 'true'
+            UNACCENT: 'true'
+            LOG_LEVEL: 'debug'
             # Odoo-saas
-            FIXDBS: true
+            FIXDBS: 'true'
             SERVER_MODE: Dev
             SERVER_WIDE_MODULES: base,web,server_mode,saas_client
             # Redis session store (only if odoo-saas)
