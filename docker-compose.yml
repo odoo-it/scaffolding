@@ -49,6 +49,7 @@ services:
         volumes:
             - ./repositories:/home/odoo/custom/repositories:rw,z
             - filestore:/home/odoo/data
+            - /etc/timezone:/etc/timezone:ro
 
         depends_on:
             - db
