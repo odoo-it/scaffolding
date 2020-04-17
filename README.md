@@ -24,4 +24,5 @@ odoo
 # Known Issues
 
 From time to time, you might need to pull latests changes in the images of your projects.
+
 ie: `docker pull druidoo/odoo-saas:13-enterprise`
