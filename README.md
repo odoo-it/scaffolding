@@ -1,6 +1,13 @@
 # druidoo-scaffolding
 Docker-compose scaffolding project, to use with odoo-druidoo images
 
+# Requirements
+
+- docker
+- docker-compose
+
+# Usage
+
 
 1. Clone repository to your project folder
 ```
