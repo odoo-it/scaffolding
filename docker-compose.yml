@@ -21,7 +21,7 @@ services:
             - 'yes'
         
     odoo:
-        image: druidoo/odoo-saas:12.0-enterprise
+        image: druidoo/odoo-saas:13.0-enterprise
         ports:
             - "8069:8069"
         
@@ -29,8 +29,7 @@ services:
         stdin_open: true
 
         environment:
-            DATABASE: &dbname test
-            PGDATABASE: *dbname
+            PGDATABASE: test
             WAIT_PG: 'true'
             LIST_DB: 'true'
             UNACCENT: 'true'
