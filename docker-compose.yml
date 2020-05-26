@@ -41,9 +41,12 @@ services:
             # Redis session store (only if odoo-saas)
             REDIS_HOST: redis
             ENABLE_REDIS: 'True'
-            # Custom Entrypoints
+            # Custom config
             CUSTOM_CONFIG: |-
                 [options]
+            # Custom requirements.txt
+            CUSTOM_REQUIREMENTS: |-
+                # custom pip libraries
 
         volumes:
             - ./repositories:/home/odoo/custom/repositories:rw,z
