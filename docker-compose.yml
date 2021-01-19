@@ -10,18 +10,9 @@ services:
             PGDATA: /var/lib/postgresql/data/pgdata
         volumes:
             - db:/var/lib/postgresql/data/pgdata
-
-    redis:
-        image: redis:4-alpine
-        volumes:
-            - redis:/data
-        command:
-            - redis-server
-            - --appendonly
-            - 'yes'
         
     odoo:
-        image: druidoo/odoo-saas:13.0-enterprise
+        image: ivantodorovich/odoo-saas:14.0-enterprise
         ports:
             - "8069:8069"
         
@@ -33,14 +24,11 @@ services:
             WAIT_PG: 'true'
             LIST_DB: 'true'
             UNACCENT: 'true'
-            LOG_LEVEL: 'debug'
+            LOG_LEVEL: 'info'
+            MAX_CRON_THREADS: 0
             # Odoo-saas
-            FIXDBS: 'true'
             SERVER_MODE: Dev
             SERVER_WIDE_MODULES: base,web,server_mode,saas_client
-            # Redis session store (only if odoo-saas)
-            REDIS_HOST: redis
-            ENABLE_REDIS: 'True'
             # Custom config
             CUSTOM_CONFIG: |-
                 [options]
@@ -50,6 +38,7 @@ services:
 
         volumes:
             - ./repositories:/home/odoo/custom/repositories:rw,z
+            #- ./sources/odoo:/home/odoo/src/odoo:rw,z
             - filestore:/home/odoo/data
             # Timezone from host
             - /etc/timezone:/etc/timezone:ro
@@ -57,9 +46,7 @@ services:
 
         depends_on:
             - db
-            - redis
 
 volumes:
     db:
     filestore:
-    redis:
